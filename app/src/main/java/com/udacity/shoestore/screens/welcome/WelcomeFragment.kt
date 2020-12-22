@@ -27,13 +27,13 @@ class WelcomeFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
-        viewModel.eventNext.observe(viewLifecycleOwner, Observer { eventLoginOrCreate ->
-            if (eventLoginOrCreate) {
+        viewModel.eventNext.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let {
                 val action = WelcomeFragmentDirections.actionWelcomeFragmentToInstructionFragment()
                 NavHostFragment.findNavController(this).navigate(action)
-                viewModel.onNextDone()
             }
         })
+
 
         return binding.root
     }
