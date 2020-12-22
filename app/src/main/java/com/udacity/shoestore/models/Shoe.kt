@@ -2,6 +2,7 @@ package com.udacity.shoestore.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
+import timber.log.Timber
 
 @Parcelize
 data class Shoe(
@@ -37,5 +38,7 @@ data class Shoe(
         )
     }
 
-
+    fun onSaveClick() {
+        Timber.i("Saved from Shoe.kt")
+    }
 }

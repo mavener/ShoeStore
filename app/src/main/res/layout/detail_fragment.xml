@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="shoe"
             type="com.udacity.shoestore.models.Shoe" />
+
         <variable
             name="sharedViewModel"
-            type="com.udacity.shoestore.SharedViewModel"/>
+            type="com.udacity.shoestore.SharedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,8 +35,7 @@
                 android:id="@+id/name_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={shoe.name}"
-                />
+                android:text="@={shoe.name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -47,9 +48,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/size_edit_text"
-                android:text="0"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="0" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -63,9 +64,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/company_edit_text"
                 android:layout_width="match_parent"
-                android:text="@={shoe.company}"
+                android:layout_height="wrap_content"
 
-                android:layout_height="wrap_content" />
+                android:text="@={shoe.company}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -79,8 +80,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/description_edit_text"
                 android:layout_width="match_parent"
-                android:text="@={shoe.description}"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@={shoe.description}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -88,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:onClick="@{()->sharedViewModel.addShoe(shoe)}"
             android:text="Save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description_text_input" />
