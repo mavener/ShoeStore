@@ -1,16 +1,14 @@
 package com.udacity.shoestore.screens.shoelist
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.udacity.shoestore.R
 import com.udacity.shoestore.SharedViewModel
@@ -36,21 +34,11 @@ class ShoeListFragment : Fragment() {
         binding.shoeListViewModel = viewModel
 
 
-        val view: View = requireActivity().findViewById(R.id.toolbar)
-        toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.inflateMenu(R.menu.menu)
-        toolbar.setOnMenuItemClickListener {
-            onOptionsItemSelected(it)
-        }
 
         sharedViewModel.shoeList.observe(viewLifecycleOwner, Observer {
             for (shoe in it) {
                 val shoeViewBinding = ShoeViewBinding.inflate(inflater, binding.linearLayout, true)
                 shoeViewBinding.shoe = shoe
-
-                shoeViewBinding.root.setOnClickListener {
-                    Toast.makeText(activity, shoe.name, Toast.LENGTH_SHORT).show()
-                }
             }
         })
 
@@ -61,6 +49,8 @@ class ShoeListFragment : Fragment() {
             }
         })
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -69,12 +59,14 @@ class ShoeListFragment : Fragment() {
             R.id.logout -> {
                 val action = ShoeListFragmentDirections.actionShoeListFragmentToLoginFragment()
                 NavHostFragment.findNavController(this).navigate(action)
-                toolbar.menu.clear() //this is ugly I think, but don't know how to do it better
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+    }
 }
