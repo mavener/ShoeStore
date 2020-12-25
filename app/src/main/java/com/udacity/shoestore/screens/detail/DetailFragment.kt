@@ -11,7 +11,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import com.udacity.shoestore.SavedState
 import com.udacity.shoestore.SharedViewModel
 import com.udacity.shoestore.databinding.DetailFragmentBinding
 import com.udacity.shoestore.models.Shoe
@@ -36,13 +35,13 @@ class DetailFragment : Fragment() {
 
 
         sharedViewModel.saveState.observe(viewLifecycleOwner, Observer {
-            if (it == com.udacity.shoestore.SavedState.ERROR) {
+            if (it == -1) {
                 Toast.makeText(activity, "Fill all inputs.", Toast.LENGTH_SHORT).show()
                 sharedViewModel.resetSavedState()
             }
 
 
-            if (it == com.udacity.shoestore.SavedState.SUCCESS) {
+            if (it == 1) {
                 Toast.makeText(activity, "Shoe added", Toast.LENGTH_SHORT).show()
                 val action = DetailFragmentDirections.actionDetailFragmentToShoeListFragment()
                 NavHostFragment.findNavController(this).navigate(action)

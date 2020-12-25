@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.udacity.shoestore.Converter" />
 
         <variable
             name="shoe"
@@ -50,7 +51,8 @@
                 android:id="@+id/size_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0" />
+                android:inputType="numberDecimal"
+                android:text="@={Converter.doubleToString(shoe.size)}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout

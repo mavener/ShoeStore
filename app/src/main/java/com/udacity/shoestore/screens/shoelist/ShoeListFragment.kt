@@ -26,8 +26,7 @@ class ShoeListFragment : Fragment() {
     private lateinit var toolbar : Toolbar
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
         binding = ShoeListFragmentBinding.inflate(inflater, container, false)
@@ -37,7 +36,6 @@ class ShoeListFragment : Fragment() {
         binding.shoeListViewModel = viewModel
 
 
-        // adding the Logout to toolbar from this fragment - not sure if this is the best way
         val view: View = requireActivity().findViewById(R.id.toolbar)
         toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         toolbar.inflateMenu(R.menu.menu)

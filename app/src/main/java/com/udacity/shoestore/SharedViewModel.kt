@@ -5,9 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.models.Shoe
 
-enum class SavedState {
-    DEFAULT, SUCCESS, ERROR
-}
+
 
 class SharedViewModel : ViewModel() {
 
@@ -17,8 +15,8 @@ class SharedViewModel : ViewModel() {
     val shoeList: LiveData<MutableList<Shoe>>
         get() = _shoeList
 
-    val _saveState = MutableLiveData<SavedState>(SavedState.DEFAULT)
-    val saveState : LiveData<SavedState>
+    val _saveState = MutableLiveData<Int>(0)
+    val saveState : LiveData<Int>
         get() = _saveState
 
 
@@ -28,17 +26,20 @@ class SharedViewModel : ViewModel() {
 
 
     fun addShoe(shoe: Shoe) {
-        if (shoe.name.isEmpty() || shoe.size <= 0 || shoe.company.isEmpty() || shoe.description.isEmpty())
+        if (shoe.name.isEmpty() || shoe.size <= 0.0 || shoe.company.isEmpty() || shoe.description.isEmpty())
         {
-            _saveState.value = SavedState.ERROR
+            _saveState.value = -1
         } else {
-            _shoeList.value?.add(shoe)
-            _saveState.value = SavedState.SUCCESS
+            val shoeList = _shoeList.value as MutableList<Shoe>
+            shoeList.add(shoe)
+            _shoeList.value = shoeList
+
+            _saveState.value = 1
         }
     }
 
     fun resetSavedState() {
-        _saveState.value = SavedState.DEFAULT
+        _saveState.value = 0
     }
 
 }
